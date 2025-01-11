@@ -1,0 +1,63 @@
+{
+  "name": "dev-music-companion",
+  "displayName": "Developer Music Companion",
+  "description": "Adaptive music player for developers that responds to coding activity",
+  "version": "1.0.0",
+  "type": "module",
+  "engines": {
+    "vscode": "^1.60.0"
+  },
+  "categories": [
+    "Other"
+  ],
+  "activationEvents": [
+    "onCommand:musiccompanion.skip",
+    "onCommand:musiccompanion.play",
+    "onCommand:musiccompanion.stop"
+  ],
+  "main": "./extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "musiccompanion.skip",
+        "title": "Skip Track",
+        "category": "Music Companion"
+      },
+      {
+        "command": "musiccompanion.play",
+        "title": "Play Music",
+        "category": "Music Companion"
+      },
+      {
+        "command": "musiccompanion.stop",
+        "title": "Stop Music",
+        "category": "Music Companion"
+      }
+    ],
+    "keybindings": [
+      {
+        "command": "musiccompanion.skip",
+        "key": "ctrl+alt+s",
+        "mac": "cmd+alt+s"
+      },
+      {
+        "command": "musiccompanion.play",
+        "key": "ctrl+alt+p",
+        "mac": "cmd+alt+p"
+      },
+      {
+        "command": "musiccompanion.stop",
+        "key": "ctrl+alt+x",
+        "mac": "cmd+alt+x"
+      }
+    ]
+  },
+  "dependencies": {
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "node-fetch": "^3.3.2",
+    "open": "^10.1.0",
+    "puppeteer-core": "^23.11.1",
+    "vscode": "^1.60.0"
+  }
+}
