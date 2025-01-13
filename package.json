@@ -1,63 +1,184 @@
 {
   "name": "dev-music-companion",
   "displayName": "Developer Music Companion",
-  "description": "Adaptive music player for developers that responds to coding activity",
+  "description": "Adaptive background music for coding based on productivity patterns",
   "version": "1.0.0",
+  "publisher": "vitalismutwiri",
   "type": "module",
   "engines": {
     "vscode": "^1.60.0"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/svitalis123/music-companion.git"
+  },
   "categories": [
     "Other"
   ],
-  "activationEvents": [
-    "onCommand:musiccompanion.skip",
-    "onCommand:musiccompanion.play",
-    "onCommand:musiccompanion.stop"
+  "keywords": [
+    "music",
+    "productivity",
+    "coding",
+    "background music",
+    "focus"
   ],
-  "main": "./extension.js",
+  "icon": "resources/music-companion.png",
+  "galleryBanner": {
+    "color": "#1e1e1e",
+    "theme": "dark"
+  },
+  "activationEvents": [
+    "*"  
+  ],
+  "main": "./src/extension.js",
   "contributes": {
     "commands": [
       {
-        "command": "musiccompanion.skip",
-        "title": "Skip Track",
-        "category": "Music Companion"
+        "command": "musicCompanion.skipTrack",
+        "title": "Music Companion: Skip Track",
+        "icon": "$(debug-step-over)"
       },
       {
-        "command": "musiccompanion.play",
-        "title": "Play Music",
-        "category": "Music Companion"
+        "command": "musicCompanion.playMusic",
+        "title": "Music Companion: Play Music",
+        "icon": "$(play)"
       },
       {
-        "command": "musiccompanion.stop",
-        "title": "Stop Music",
-        "category": "Music Companion"
+        "command": "musicCompanion.pauseMusic",
+        "title": "Music Companion: Pause Music",
+        "icon": "$(debug-pause)"
+      },
+      {
+        "command": "musicCompanion.stopMusic",
+        "title": "Music Companion: Stop Music",
+        "icon": "$(debug-stop)"
+      },
+      {
+        "command": "musicCompanion.showMusicControls",
+        "title": "Music Companion: Show Controls",
+        "icon": "$(layout-panel)"
       }
     ],
+    "menus": {
+      "view/title": [
+        {
+          "command": "musicCompanion.playMusic",
+          "when": "view == music-companion-controls",
+          "group": "navigation@1"
+        },
+        {
+          "command": "musicCompanion.skipTrack",
+          "when": "view == music-companion-controls",
+          "group": "navigation@2"
+        },
+        {
+          "command": "musicCompanion.stopMusic",
+          "when": "view == music-companion-controls",
+          "group": "navigation@3"
+        }
+      ]
+    },
     "keybindings": [
       {
-        "command": "musiccompanion.skip",
+        "command": "musicCompanion.skipTrack",
         "key": "ctrl+alt+s",
-        "mac": "cmd+alt+s"
+        "mac": "cmd+alt+s",
+        "when": "editorTextFocus"
       },
       {
-        "command": "musiccompanion.play",
+        "command": "musicCompanion.playMusic",
         "key": "ctrl+alt+p",
-        "mac": "cmd+alt+p"
+        "mac": "cmd+alt+p",
+        "when": "editorTextFocus"
       },
       {
-        "command": "musiccompanion.stop",
+        "command": "musicCompanion.pauseMusic",
+        "key": "ctrl+alt+space",
+        "mac": "cmd+alt+space",
+        "when": "editorTextFocus"
+      },
+      {
+        "command": "musicCompanion.stopMusic",
         "key": "ctrl+alt+x",
-        "mac": "cmd+alt+x"
+        "mac": "cmd+alt+x",
+        "when": "editorTextFocus"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "music-companion",
+          "title": "Music Companion",
+          "icon": "resources/music-companion.svg"
+        }
+      ]
+    },
+    "views": {
+      "music-companion": [
+        {
+          "type": "webview",
+          "id": "music-companion-controls",
+          "name": "Now Playing",
+          "icon": "resources/music-companion.svg",
+          "visibility": "visible"
+        }
+      ]
+    },
+    "configuration": {
+      "title": "Music Companion",
+      "properties": {
+        "musicCompanion.lastfmApiKey": {
+          "type": "string",
+          "default": "",
+          "description": "Your Last.fm API key"
+        },
+        "musicCompanion.autoStart": {
+          "type": "boolean",
+          "default": false,
+          "description": "Automatically start music when VS Code launches"
+        },
+        "musicCompanion.defaultMood": {
+          "type": "string",
+          "enum": [
+            "focus",
+            "energetic",
+            "calm",
+            "ambient"
+          ],
+          "default": "focus",
+          "description": "Default mood for music selection"
+        },
+        "musicCompanion.volume": {
+          "type": "number",
+          "default": 50,
+          "minimum": 0,
+          "maximum": 100,
+          "description": "Default volume level (0-100)"
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "echo 'No compilation needed'",
+    "package": "vsce package",
+    "publish": "vsce publish"
   },
   "dependencies": {
-    "dotenv": "^16.4.7",
-    "express": "^4.21.2",
-    "node-fetch": "^3.3.2",
-    "open": "^10.1.0",
-    "puppeteer-core": "^23.11.1",
-    "vscode": "^1.60.0"
+    "node-fetch": "^3.3.0",
+    "puppeteer-core": "^19.7.0"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.0.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.60.0",
+    "@vscode/test-electron": "^2.2.2",
+    "eslint": "^8.33.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.1.0",
+    "typescript": "^4.9.4",
+    "vscode": "^1.1.37",
+    "@vscode/vsce": "^2.15.0"
   }
 }

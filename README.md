@@ -1,6 +1,20 @@
-# Developer Music Companion VS Code Extension
+# Developer Music Companion
 
 A VS Code extension that provides adaptive background music based on your coding activity. The music selection adapts to your productivity patterns to enhance your coding experience.
+
+## Requirements
+
+- VS Code 1.60.0 or higher
+- Google Chrome or Chromium browser installed
+- Last.fm API key (free)
+- Internet connection
+
+## Installation
+
+1. Install the extension from the VS Code marketplace
+2. You'll be prompted to configure your Last.fm API key on first use
+   - If you don't have a key, the extension will guide you to create one
+   - If you have a key, you can enter it directly
 
 ## Features
 
@@ -8,108 +22,59 @@ A VS Code extension that provides adaptive background music based on your coding
 - Keyboard shortcuts for easy control
 - Integrates with Last.fm for music selection
 - Automatically adjusts music based on your coding activity
+- Shows current track in status bar and sidebar
 
-## Installation
+## Getting Started
 
-1. Install the extension from the VS Code marketplace
-2. Configure your Last.fm API key in Settings
-3. Restart VS Code
+1. After installation, click "Get API Key" in the welcome message
+2. Create a free Last.fm account and get your API key
+3. Enter the API key when prompted
+4. The extension will automatically start playing music
 
-## Keyboard Shortcuts
+## Controls
 
+Keyboard Shortcuts:
 - Skip Track: `Ctrl+Alt+S` (Windows/Linux) or `Cmd+Alt+S` (Mac)
 - Play/Pause: `Ctrl+Alt+P` (Windows/Linux) or `Cmd+Alt+P` (Mac)
 - Stop: `Ctrl+Alt+X` (Windows/Linux) or `Cmd+Alt+X` (Mac)
 
-## Commands
+You can also control playback from:
+- The status bar icon
+- The sidebar view
+- The command palette
 
-All commands are available in the Command Palette (`Ctrl+Shift+P` or `Cmd+Shift+P`):
+## Configuration
 
-- `Music Companion: Skip Track`
-- `Music Companion: Play Music`
-- `Music Companion: Stop Music`
+Settings available in VS Code:
+- `musicCompanion.lastfmApiKey`: Your Last.fm API key
+- `musicCompanion.autoStart`: Automatically start music when VS Code launches
+- `musicCompanion.defaultMood`: Default mood for music selection
 
-## Requirements
+## Troubleshooting
 
-- VS Code 1.60.0 or higher
-- Internet connection for Last.fm API access
-- Chrome or Chromium browser installed
+1. If music doesn't play:
+   - Check that Chrome/Chromium is installed
+   - Verify your internet connection
+   - Ensure your Last.fm API key is correct
 
+2. If the extension doesn't activate:
+   - Try reloading VS Code
+   - Check the extension is enabled
+   - Verify VS Code version is 1.60.0 or higher
 
-Based on your README.md file and the available information, I can help you publish your Developer Music Companion extension to the Visual Studio Marketplace. Here's a step-by-step guide: [1]
+## Privacy
 
-First, install the vsce (Visual Studio Code Extensions) packaging tool:
+- Your Last.fm API key is stored securely in VS Code settings
+- No personal data is collected or transmitted
+- Music playback occurs locally through your browser
 
-npm install -g vsce
+## License
 
-Copy
+MIT License - see LICENSE file for details.
 
-Insert at cursor
-bash
-Make sure your extension's package.json has all the required fields:
+## Support
 
-{
-    "name": "developer-music-companion",
-    "displayName": "Developer Music Companion",
-    "description": "Adaptive background music based on your coding activity",
-    "version": "1.0.0",
-    "publisher": "your-publisher-name",
-    "engines": {
-        "vscode": "^1.60.0"
-    },
-    "categories": ["Other"],
-    "repository": {
-        "type": "git",
-        "url": "YOUR_REPOSITORY_URL"
-    }
-}
-
-Copy
-
-Insert at cursor
-json
-Create a publisher account on the Visual Studio Marketplace if you haven't already. You'll need to sign in with either a Microsoft or Azure DevOps account.
-
-Once you've created your publisher account, you'll receive a Personal Access Token (PAT). Create one with the "Marketplace Publishing" scope.
-
-Login to vsce with your publisher account:
-
-vsce login <publisher-name>
-
-Copy
-
-Insert at cursor
-bash
-Package your extension:
-
-vsce package
-
-Copy
-
-Insert at cursor
-bash
-This will create a .vsix file.
-
-Publish your extension:
-
-vsce publish
-
-Copy
-
-Insert at cursor
-bash
-Additional tips:
-
-Make sure you have a good README.md file (which you already have)
-
-Include a license file if you haven't already
-
-Add some screenshots or GIFs demonstrating your extension
-
-Consider adding an icon for your extension
-
-Test your extension thoroughly before publishing
-
-After publishing, your extension should be available in the VS Code marketplace within a few minutes. Users will be able to find it by searching for "Developer Music Companion" in the VS Code extensions tab.
-
-Remember to increment your version number in package.json when you publish updates to your extension.
+If you encounter any issues or have suggestions:
+1. Check the troubleshooting guide
+2. Visit our GitHub repository
+3. Submit an issue on GitHub
